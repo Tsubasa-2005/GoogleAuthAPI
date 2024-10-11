@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  google-auth-db:
+    image: postgres:16.1
+    container_name: google-auth-db
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=google_auth
+    volumes:
+      - local_google_auth_volume:/var/lib/postgresql/data
+      - ./db:/docker-entrypoint-initdb.d
+
+volumes:
+  local_google_auth_volume:
